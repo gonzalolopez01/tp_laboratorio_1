@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1599963494 source:d:\fra\lab_prog1\ejercicios\calculadora\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<conio.h>
+	"funciones.h"
+
+1599964121 d:\fra\lab_prog1\ejercicios\calculadora\funciones.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<conio.h>
+
+1599964796 source:d:\fra\lab_prog1\ejercicios\calculadora\funciones.c
+	"funciones.h"
+
