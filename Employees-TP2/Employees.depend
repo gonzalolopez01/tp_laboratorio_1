@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1601692658 source:d:\fra\lab_prog1\ejercicios\employees\semployees.c
+	"sEmployees.h"
+	"validations.h"
+
+1601690666 d:\fra\lab_prog1\ejercicios\employees\semployees.h
+
+1601692848 source:d:\fra\lab_prog1\ejercicios\employees\main.c
+	<stdio.h>
+	<stdlib.h>
+	"sEmployees.h"
+	"menu.h"
+
+1601614176 source:d:\fra\lab_prog1\ejercicios\employees\menu.c
+
+1601608957 d:\fra\lab_prog1\ejercicios\employees\validations.h
+
+1601624311 source:d:\fra\lab_prog1\ejercicios\employees\validations.c
+	"validations.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1601614176 d:\fra\lab_prog1\ejercicios\employees\menu.h
+
