@@ -38,6 +38,7 @@ int mascota_listarMascotas(LinkedList* pArray);
 int mascota_loadFromText(LinkedList* pArray, char* path);
 
 int mascotas_criterio(void* pAuxiliary1, void* pAuxiliary2);
+int filterHembras(void* pElement);
 
 char strToCh(char* string);
 
@@ -158,6 +159,13 @@ int main(void) {
 	mascota_listarMascotas(mascotasClon);
 
 	printf("\n\n");
+	puts("ll_filter: Devuelva un puntero a una nueva lista a partir de la funcion que filtra a la lista original.");
+	puts("Se hace LinkedList* listaHembras = ll_filter(mascotas, filterHembras)");
+	LinkedList* listaHembras = ll_filter(mascotas, filterHembras);
+	puts("Lista resultado de filtras todas las mascotas hembras: \n");
+	mascota_listarMascotas(listaHembras);
+
+	printf("\n\n");
 	puts("*ll_sort: ordena los elementos de una lista segun el resultado que devuelva la funcion criterio que se pasa como parametro y");
 	puts("el parametro order que dira si se hara el orden de forma descendente o ascendente.");
 	puts("Para ordenara, por ejemplo por nombre, se hizo una funcion criterio que es la que se le va a pasar a ll_sort y de acuero a");
@@ -169,14 +177,18 @@ int main(void) {
 	ll_sort(mascotas, mascotas_criterio, 1);
 	mascota_listarMascotas(mascotas);
 
-	puts("*ll_indexOf: se le pasa una lista y un elemento y si el mismo se encuentra en la lista devuelve el indice de su primera aparicion.");
-	puts("Se hace un ll_get de un elemento de la lista mascota2 y lo buscamos en la lista mascota.");
-	puts("pMascota = ll_get(mascotas, 5)");
-	pMascota = ll_get(mascotas, 3);
+	puts("*ll_indexOf: se le pasa una lista y un elemento y si el mismo se encuentra en la lista, ll_indexOf devuelve el indice de la primera aparicion del elemento.");
+	puts("Se hace ll_get de un elemento de la lista ""mascotas"" y luego se lo busca en la lista ""mascotas2"".");
+	puts("pMascota = ll_get(mascotas2, 2)");
+	pMascota = ll_get(mascotas2, 2);
+	puts("La mascota en el indice 2 es: ");
+	mascota_mostrarMascota(pMascota);
+	puts("Lista ""mascotas""");
 	mascota_listarMascotas(mascotas);
+	puts("Lista ""mascotas2""");
 	mascota_listarMascotas(mascotas2);
-	printf("Resultado de indexOf: %d\n", ll_indexOf(mascotas2, pMascota));
-	puts("Morena de la lista mascota, se encuentra en el indice 2 de mascotas2");
+	puts("Resultado de indexOf (ll_indexOf(mascotas2,pMascota):");
+	printf("Morena de la lista mascotas se encuentra en el indice %d de mascotas2\n", ll_indexOf(mascotas2, pMascota));
 
 	printf("\n\n");
 	puts("*ll_remove: elimina un elemento de la lista segun el indice especificado");
@@ -195,6 +207,9 @@ int main(void) {
 	puts("ll_deleteLinkedList: Elimina la lista especificada.");
 	printf("ll_deleteLinkedList(mascotas): %d. Funciono correctamente ", ll_deleteLinkedList(mascotas));
 
+	ll_deleteLinkedList(mascotasClon);
+	ll_deleteLinkedList(listaHembras);
+	ll_deleteLinkedList(mascotas2);
 
 
 
@@ -399,4 +414,15 @@ int mascotas_criterio(void* pAuxiliary1, void* pAuxiliary2)
 		}
 	}
 	return compare;
+}
+int filterHembras(void* pMascota){
+	int returnAux = 0;
+	eMascota* aux = NULL;
+	if(pMascota != NULL){
+		aux = (eMascota*)pMascota;
+		if(aux->sexo == 'f'){
+			returnAux = 1;
+		}
+	}
+	return returnAux;
 }
