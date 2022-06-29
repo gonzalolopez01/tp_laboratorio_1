@@ -6,6 +6,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include "string.h"
 
 #ifndef FLYCODE_H_
 #define FLYCODE_H_

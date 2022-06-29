@@ -653,6 +653,9 @@ void controller_sortMenu(LinkedList* pArray)
 					controller_sortPassengerStatus(pClon, order);
 					controller_ListPassenger(pClon);
 					break;
+				case 8:
+					option = 8;
+					break;
 			}
 		}while(option != 8);
 		ll_clear(pClon);
