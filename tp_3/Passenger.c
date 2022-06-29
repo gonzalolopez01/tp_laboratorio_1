@@ -8,12 +8,28 @@
 #include "Passenger.h"
 
 
-
+/**reserve space in the dynamic memory for a passanger type struct
+ *
+ * @return pointer to the reserved space
+ * 			Null: failed to reserve space
+ */
 sPassenger* Passenger_new(){
 	sPassenger* newPassenger = NULL;
 
 	return newPassenger = (sPassenger*)malloc(sizeof(sPassenger));
 }
+/**
+ * set the parameters for the struct in the dynamic memory
+ * @param idStr
+ * @param nombreStr
+ * @param apellidoStr
+ * @param precioStr
+ * @param codigoVueloStr
+ * @param tipoPasajeroStr
+ * @param statusFlightStr
+ * @return Null if creating the space for a passanger was not possible
+ * 			pointer to the passenger created in the dynamic memory
+ */
 sPassenger* Passenger_newParametrosStr(char* idStr, char* nombreStr, char* apellidoStr, char* precioStr, char* codigoVueloStr, char* tipoPasajeroStr , char* statusFlightStr){
 	sPassenger* pPassenger = Passenger_new();
 	if(pPassenger != NULL){
@@ -50,6 +66,10 @@ sPassenger* Passenger_newParametros(int id, char* nombre, char* apellido, float 
 
 	return pPassenger;
 }
+/**
+ * delete the passenger from the dynamic memory
+ * @param pPassenger
+ */
 void Passenger_delete(sPassenger* pPassenger){
 	free(pPassenger);
 }
@@ -183,7 +203,12 @@ int Passenger_getStatusFlight(sPassenger* this, int* statusFlight){
 }
 //-------------------------------------------------------------
 //-------------------------------------------------------------
-
+/**
+ * shows certain passenger
+ * @param pPassenger: pointer to a passenger
+ * @return -1: pointer error
+ * 			0: ok
+ */
 int Passenger_showPassenger(sPassenger* pPassenger){
 	int ret = -1;
 	if(pPassenger != NULL){
@@ -245,6 +270,14 @@ int Passenger_showPassengerColumns(sPassenger* pPassenger){
 	return ret;
 }
 //-------------------------------------------------------------
+/**
+ * compares two certain element ids
+ * @param aux1
+ * @param aux2
+ * @return 1: aux1 >
+ * 			-1: aux2 >
+ * 			0: equals
+ */
 int Passenger_compareByID(void* aux1, void* aux2)
 {
 	int compare = 0;
@@ -268,6 +301,14 @@ int Passenger_compareByID(void* aux1, void* aux2)
 	}
 	return compare;
 }
+/**
+ * compares two certain element names
+ * @param aux1
+ * @param aux2
+ * @return > 1: aux1
+ * 			< 1: aux2
+ * 			0: equals
+ */
 int Passenger_compareByName(void* aux1, void* aux2)
 {
 	int compare = 0;
@@ -286,6 +327,14 @@ int Passenger_compareByName(void* aux1, void* aux2)
 	}
 	return compare;
 }
+/**
+ * compares two certain element lastnames
+ * @param aux1
+ * @param aux2
+ * @return > 1: aux1
+ * 			< 1: aux2
+ * 			0: equals
+ */
 int Passenger_compareByLastname(void* aux1, void* aux2)
 {
 	int compare = 0;
@@ -304,6 +353,14 @@ int Passenger_compareByLastname(void* aux1, void* aux2)
 	}
 	return compare;
 }
+/**
+ * compares two certain element prices
+ * @param aux1
+ * @param aux2
+ * @return 1: aux1 >
+ * 			-1: aux2 >
+ * 			0: equals
+ */
 int Passenger_compareByPrice(void* aux1, void* aux2)
 {
 	int compare = 0;

@@ -21,7 +21,15 @@ int passengers_menu(){
 	input_IntNumberMinMax(&opcion, "Ingrese opcion: ", "ERROR, valor invalido. ", 1, 6, "ERROR, opcion Invalida");
 	return opcion;
 }
-
+/**
+ * carga de datos en la lista de manera manual
+ * @param list: nombre
+ * @param len: tamaño de la lista
+ * @param quantity: cantidad a cargar
+ * @param pNextId: id del elemento
+ * @return 1: ok
+ * 			0: error
+ */
 int harcodearPassengers(sPassenger* list, int len, int quantity, int* pNextId){
 	int retOk = 0;
 	sPassenger passengers[10]={{1, "Juan", "Lopez",         3200, "WBA374", 100, 1, 0},
@@ -48,6 +56,13 @@ int harcodearPassengers(sPassenger* list, int len, int quantity, int* pNextId){
 	return retOk;
 }
 //------------------
+/**
+ * actualiza el campo isEmpty en 1 para indicar que cada indice de la lista esta vacia
+ * @param list
+ * @param len: tamano
+ * @return 0: error
+ * 			1: ok
+ */
 int passengers_initPassengers(sPassenger* list, int len){
     int retOk = 0;
     if(list != NULL && len > 0){
@@ -153,6 +168,14 @@ int passengers_entryLastaName(char lastName[]){
 	}
 	return retOk;
 }
+/**
+ * permite obtener un flycode validado
+ * @param fCode:recibe el codigo de vuelos
+ * @param flycodes
+ * @param len
+ * @return 1 ok
+ * 			0 error de punteros o tamano de la lista
+ */
 int passengers_entryFlycode(char* fCode, sFlycode flycodes[], int len){
 	int retOk = 0;
 	if(fCode != NULL && flycodes != NULL && len > 0){
@@ -166,6 +189,15 @@ int passengers_entryFlycode(char* fCode, sFlycode flycodes[], int len){
 	}
 	return retOk;
 }
+/**
+ * obtiene el status de determinada vuelo
+ * @param flycodes: codigo de vuelo
+ * @param len tamano
+ * @param fCode codigo
+ * @param statusF recibe el estado del vuelo (1 o 0)
+ * @return 1 ok
+ * 			0 ok
+ */
 int passengers_setStatusFlight(sFlycode flycodes[], int len, char fCode[], int* statusF){
     int retOk = 0;
 	if(flycodes != NULL && len > 0 && fCode != NULL && statusF != NULL){
@@ -179,6 +211,14 @@ int passengers_setStatusFlight(sFlycode flycodes[], int len, char fCode[], int* 
 	}
     return retOk;
 }
+/**
+ * permite obtener un tipo de pasajero validad
+ * @param type: recibe el id del tipo de pasajero
+ * @param list
+ * @param len: tamano
+ * @return 1 ok
+ * 			0 error en punteros o tamano
+ */
 int passengers_entryType(int* type, sTypePassenger* list, int len){
 	int retOk = 0;
 	if(type != NULL && list != NULL && len > 0){
@@ -215,6 +255,20 @@ int passengers_findFree(sPassenger list[], int len, int* pIndex){
 	}
 	return retOk;
 }
+/**
+ * carga todos los atributos de un pasajero en variables.
+ * carga a un pasajero con estos atributos
+ * busca un lugar libre en un lista y ,si puede, lo agrega
+ * @param passengers
+ * @param lenP
+ * @param types
+ * @param lenT
+ * @param codes
+ * @param lenC
+ * @param pNextId
+ * @return 0: error, no hay lugar o algo ocurrio al setear los atributos del pasajero
+ * 			1: carga exitosa
+ */
 int passengers_entryPassenger(sPassenger passengers[], int lenP, sTypePassenger types[], int lenT, sFlycode codes[], int lenC, int* pNextId){
 	int retOk = 0;
     int index;
@@ -243,6 +297,21 @@ int passengers_entryPassenger(sPassenger passengers[], int lenP, sTypePassenger 
 
 	return retOk;
 }
+/**
+ * agrega un pasjero en un lista en el indice indicado
+ * @param list
+ * @param len
+ * @param name
+ * @param lastName
+ * @param flycode
+ * @param type
+ * @param price
+ * @param statusFlight
+ * @param idea
+ * @param index: indice en el que se agrega el pasajero
+ * @return 0 error
+ * 			1 ok
+ */
 int passangers_addPassenger(sPassenger list[], int len, char name[], char lastName[], char flycode[], int type, float price, int statusFlight, int idea, int index){
     int retOk = 0;
     if(list != NULL && len > 0 && name != NULL && lastName != NULL){

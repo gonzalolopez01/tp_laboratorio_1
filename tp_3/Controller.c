@@ -12,12 +12,13 @@
 
 
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo texto).
+/** \brief Carga los datos de los pasajeros desde un archivo de texto.
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
- *
+ * \return -1: error
+ * 			-2: puntero a archivo NULL
+ *			> 0: cantidad de elementos parseados
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListPassenger)
 {
@@ -35,12 +36,13 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPassenger)
 	return returnAux;
 }
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo binario).
+/** \brief Carga los datos de los pasajeros desde un archivo de texto.
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
- *
+ * \return -1: error
+ * 			-2: puntero a archivo NULL
+ *			> 0: cantidad de elementos parseados
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 {
@@ -57,7 +59,14 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 	}
 	return returnAux;
 }
-
+/** \brief Carga los datos de los vuelos desde un archivo de texto.
+ *
+ * \param path char*
+ * \param pArrayListPassenger LinkedList*
+ * \return -1: error
+ * 			-2: puntero a archivo NULL
+ *			> 0: cantidad de elementos parseados
+ */
 int controller_loadFromTextFlight(char* path , LinkedList* pArrayListFlights)
 {
 	int returnAux = -1;
@@ -78,8 +87,9 @@ int controller_loadFromTextFlight(char* path , LinkedList* pArrayListFlights)
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
- *
+ * \return -1: error
+ *			0: no se pudo agregar un pasajero
+ *			1: se agrego un pasajero con exito
  */
 int controller_addPassenger(LinkedList* pArrayListPassenger, LinkedList* pArrayListFlight, int* id)
 {
@@ -123,7 +133,8 @@ int controller_addPassenger(LinkedList* pArrayListPassenger, LinkedList* pArrayL
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
+ * \return -1: error
+ * 			0: de sejecuto la funcion con exito
  *
  */
 int controller_editPassenger(LinkedList* pArrayListPassenger, LinkedList* pArrayListFlight)
@@ -140,8 +151,8 @@ int controller_editPassenger(LinkedList* pArrayListPassenger, LinkedList* pArray
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
- *
+ * \return -1: error
+ *			0: baja exitosa
  */
 int controller_removePassenger(LinkedList* pArrayListPassenger)
 {
@@ -203,8 +214,8 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger)
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
- *
+ * \return -1: error
+ *			0: ok
  */
 int controller_sortPassengerId(LinkedList* pArrayListPassenger, int order)
 {
@@ -281,8 +292,8 @@ int controller_sortPassengerStatus(LinkedList* pArrayListPassenger, int order)
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
- *
+ * \return -1 error en punteros
+ *			0 ok
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
 {
@@ -327,8 +338,8 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
  *
  * \param path char*
  * \param pArrayListPassenger LinkedList*
- * \return int
- *
+ * \return -1 error en punteros
+ *			0 ok
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 {
@@ -362,7 +373,14 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 }
 
 //--------------------------------------------------------
-
+/**
+ * obtiene el estado de vuelo en formato texto desde la lista de vuelos
+ * @param pArrayListFlight
+ * @param flightCode
+ * @param statusFlight
+ * @return -1: error
+ * 			0: ok
+ */
 int controller_loadStatusFlight(LinkedList* pArrayListFlight, char* flightCode, int* statusFlight){
 	int returnAux = -1;
 	sFlight* pFlight = NULL;
@@ -381,6 +399,13 @@ int controller_loadStatusFlight(LinkedList* pArrayListFlight, char* flightCode, 
 	}
 	return returnAux;
 }
+/**
+ * valida el codigo de vuelo
+ * @param pArrayListFlight
+ * @param flightCode: codigo de vuelo
+ * @return 0: no
+ * 			1: si
+ */
 int controller_isValidFlightCode(LinkedList* pArrayListFlight, char* flightCode){
 	int returnAux = 0;
 	sFlight* pFlight = NULL;
@@ -399,6 +424,13 @@ int controller_isValidFlightCode(LinkedList* pArrayListFlight, char* flightCode)
 	}
 	return returnAux;
 }
+/**
+ * permite el ingreso de un codigo de vuelo validado, a los 3 intentos fallido aborta mision
+ * @param pArrayListFlight
+ * @param flightCode
+ * @return -1 error
+ * 			0 ok
+ */
 int controller_inputFlightCode(LinkedList* pArrayListFlight, char* flightCode){
 	int returnAux = -1;
 	if(pArrayListFlight != NULL && flightCode != NULL){
@@ -420,6 +452,15 @@ int controller_inputFlightCode(LinkedList* pArrayListFlight, char* flightCode){
 	}
 	return returnAux;
 }
+/**
+ * busca pasajero por id
+ * @param pArrayPassenger
+ * @param id
+ * @param index: recibe el indice del pasajero
+ * 			index -1: no se encontro
+ * @return -1 error
+ *			0 la funcion se ejecuto con exito
+ */
 int controller_searchIdPasajero(LinkedList* pArrayPassenger, int id, int* index){
 	int returnAux = -1;
 	sPassenger* passengerAux;
@@ -439,6 +480,13 @@ int controller_searchIdPasajero(LinkedList* pArrayPassenger, int id, int* index)
 	}
 	return returnAux;
 }
+/**
+ * valida un id
+ * @param pArray
+ * @param id
+ * @return 1 si
+ * 			0 no
+ */
 int controller_isPassengerIdValid(LinkedList* pArray, int id){
 	int returnAux = 0;
 	int index;
@@ -451,6 +499,13 @@ int controller_isPassengerIdValid(LinkedList* pArray, int id){
 	}
 	return returnAux;
 }
+/**
+ * permite ingresar un id valida
+ * @param pArray
+ * @param id
+ * @return -1 error
+ * 			0 ok
+ */
 int controller_inputIdPassenger(LinkedList* pArray, int* id){
 	int returnAux = -1;
 	if(pArray != NULL && id != NULL){
@@ -856,6 +911,13 @@ int controller_ListFlight(LinkedList* pArrayListFlight)
 	}
 	return returnAux;
 }
+/**
+ * obtiene el id maximo de una lista y le suma 1 para asignar al proximo pasajero que se ingrese
+ * @param pArray
+ * @param id : recibe e
+ * @return -1 error
+ * 			0 ok
+ */
 int controller_getMaxId(LinkedList* pArray, int* id){
 	int returnAux = -1;
 	int mayorId;
