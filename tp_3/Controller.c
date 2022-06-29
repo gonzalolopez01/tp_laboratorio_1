@@ -708,7 +708,7 @@ void controller_Menu(LinkedList *pArrayListPassenger, LinkedList *pArrayListFlig
 					}
 				}
 				if(input_strFileFormat(path, 50, "Nombre del archivo (sugerido data.csv): ", "Error. ") == 0){
-					if(isThereFileTxt(path)){
+					if(isThereFileTxt(path) && isStrFileFormat(path) == 1){
 						ll_clear(pArrayListPassenger);
 						cant = controller_loadFromText(path, pArrayListPassenger);
 						controller_getMaxId(pArrayListPassenger, &pId);
@@ -716,7 +716,7 @@ void controller_Menu(LinkedList *pArrayListPassenger, LinkedList *pArrayListFlig
 						isSaved = 0;
 						isLoaded = 1;
 					}else{
-						printf("Archivo inexistente.\n");
+						printf("Archivo inexistente o formato incorrecto.\n");
 					}
 				}
 				break;
@@ -729,7 +729,7 @@ void controller_Menu(LinkedList *pArrayListPassenger, LinkedList *pArrayListFlig
 					}
 				}
 				if(input_strFileFormat(path, 50, "Nombre del archivo: ", "Error. ") == 0){
-					if(isThereFileBin(path)){
+					if(isThereFileBin(path) && isStrFileFormat(path) == 2){
 						ll_clear(pArrayListPassenger);
 						cant = controller_loadFromBinary(path, pArrayListPassenger);
 						controller_getMaxId(pArrayListPassenger, &pId);
@@ -737,7 +737,7 @@ void controller_Menu(LinkedList *pArrayListPassenger, LinkedList *pArrayListFlig
 						isSaved = 0;
 						isLoaded = 1;
 					}else{
-						printf("Archivo inexistente.\n");
+						printf("Archivo inexistente o formato incorrecto.\n");
 					}
 				}
 				break;

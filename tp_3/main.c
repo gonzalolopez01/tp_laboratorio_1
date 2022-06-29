@@ -26,8 +26,6 @@ int main()
 {
 	setbuf(stdout,NULL);
 
-	//hacer el do while aca cuando termines
-
 
 	LinkedList* listaPasajeros = ll_newLinkedList();
 	LinkedList* listaVuelos = ll_newLinkedList();

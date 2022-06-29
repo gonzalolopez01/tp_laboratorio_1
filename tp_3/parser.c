@@ -36,9 +36,9 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger)//dev
 				if(pPassenger != NULL){
 					ll_add(pArrayListPassenger, pPassenger);
 					ret++;
-					if(ret == 50){
-						break;
-					}
+					//if(ret == 50){
+					//	break;
+					//}
 				}
 			}
 		}

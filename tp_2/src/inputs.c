@@ -35,8 +35,8 @@ int input_DecimalNumber(float* floatNumber, char* text, char* errorText)// ***
 	if(floatNumber!=NULL)
 	{
 		input_Text(string, size, text);
-		//while((isStringFloatNumber(string)) && (isStringIntegerNumber(string)))
 		while(!isStringANumber(string))
+		//while((isStringFloatNumber(string)) && (isStringIntegerNumber(string)))
 		{
 			input_Text(string, size, errorText);
 		}
